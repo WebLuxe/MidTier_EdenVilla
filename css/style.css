@@ -845,7 +845,7 @@ body[data-page="home"] main > section > .wrap { width: min(100% - 2 * var(--gut)
   .vc-body > p, .vc-tag { display: none; }
   body[data-page="home"] .vc-grid > :nth-child(n + 4) { display: none; }
   .rev-track { overflow-x: hidden !important; touch-action: pan-y; }
-  .rev-track > li { flex-basis: 100% !important; }
+  .rev-track { grid-auto-columns: 100%; }   /* one whole review at a time: the next one must not show its edge */
 }
 /* phones: each villa as a compact row so all of them fit one screen */
 @media (max-width: 759px) {

@@ -22,11 +22,13 @@
 <!-- Fonts: keep in step with "fonts" in config.js (the site corrects it if they differ). -->
 <link id="wl-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Jost:wght@400;500;600&amp;display=swap">
 <!-- The first hero photo, fetched early. Update with sections.hero.images in config.js -->
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=92bb5d8c5e">
-<script src="config.js?v=92bb5d8c5e" defer></script>
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" imagesrcset="https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=360 360w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=560 560w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1100 1100w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1500 1500w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w" imagesizes="100vw" media="(-webkit-max-device-pixel-ratio: 2.01), (max-resolution: 2.01dppx), (min-width: 760px)" fetchpriority="high">
+<!-- phones with very dense screens fetch the photo at about 2x (see DENSE_PHONE in js/main.js) -->
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1800" imagesrcset="https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=360 360w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=560 560w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1100 1100w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=1500 1500w, https://images.unsplash.com/photo-1634972312739-d7237018e06a?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w" imagesizes="67vw" media="(-webkit-min-device-pixel-ratio: 2.011) and (max-width: 759.98px), (min-resolution: 2.011dppx) and (max-width: 759.98px)" fetchpriority="high">
+<link rel="stylesheet" href="css/style.css?v=fefe5e2663">
+<script src="config.js?v=fefe5e2663" defer></script>
 <script src="data/site.js" defer></script>
-<script src="js/main.js?v=92bb5d8c5e" defer></script>
+<script src="js/main.js?v=fefe5e2663" defer></script>
 </head>
 <body data-page="home">
 <div id="app"><noscript><p style="padding:24px;font-family:sans-serif">Please turn on JavaScript to see this website.</p></noscript></div>
