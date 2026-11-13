@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- CONFIRM the address (the same as seo.siteUrl in config.js), then submit this file in Google Search Console. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://edentourltd.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edentourltd.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://edentourltd.com/?lang=it"/>
+  </url>
+  <url>
+    <loc>https://edentourltd.com/villas.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edentourltd.com/villas.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://edentourltd.com/villas.html?lang=it"/>
+  </url>
+  <url>
+    <loc>https://edentourltd.com/gallery.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edentourltd.com/gallery.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://edentourltd.com/gallery.html?lang=it"/>
+  </url>
+  <url>
+    <loc>https://edentourltd.com/book.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edentourltd.com/book.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://edentourltd.com/book.html?lang=it"/>
+  </url>
+  <url>
+    <loc>https://edentourltd.com/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edentourltd.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://edentourltd.com/contact.html?lang=it"/>
+  </url>
+</urlset>

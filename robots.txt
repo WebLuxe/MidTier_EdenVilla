@@ -1,0 +1,6 @@
+# CONFIRM the address below (the same as seo.siteUrl in config.js).
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://edentourltd.com/sitemap.xml
