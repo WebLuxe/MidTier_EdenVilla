@@ -261,7 +261,7 @@ async function inboxStatus(id, st, block) {
 /* ---------- staff logins (High) ---------- */
 let staff = null;
 async function loadStaff() {
-  if (A.mode === 'demo') { staff = { list: [{ login: 'eden-owner', role: 'admin' }, { login: 'eliana-frontoffice', role: 'write' }], invites: [] }; render(); return; }
+  if (A.mode === 'demo') { staff = { list: [{ login: 'villa-owner', role: 'admin' }, { login: 'front-office', role: 'write' }], invites: [] }; render(); return; }
   try {
     const [list, invites] = await Promise.all([gh('GET', `/repos/${REPO}/collaborators?per_page=50`), gh('GET', `/repos/${REPO}/invitations`).catch(() => [])]);
     staff = { list: list.map((u) => ({ login: u.login, avatar: u.avatar_url, role: u.role_name })), invites: invites.map((i) => ({ id: i.id, login: i.invitee && i.invitee.login })) };

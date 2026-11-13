@@ -307,6 +307,33 @@ html.intro-on .hero-rise, html.intro-on .phead-in > * { animation-play-state: pa
 html { overflow-x: clip; }
 .ticker { contain: paint; }
 
+/* ---------- one swipe, one section (home page) ---------- */
+html.snap { scroll-padding-top: 0; }
+@media (pointer: coarse), (max-width: 759px) { html.snap.snap-on { scroll-snap-type: y mandatory; } }
+html.snap .snap-pt { scroll-snap-align: start; scroll-snap-stop: always; scroll-margin-top: 61px; }
+html.snap .snap-end { scroll-snap-align: end; scroll-snap-stop: always; }
+html.snap .snap-mark { position: absolute; left: 0; width: 1px; height: 1px; pointer-events: none; scroll-snap-align: start; scroll-snap-stop: always; }
+html.snap main > .hero { min-height: calc(100svh - var(--hero-top, 0px) - var(--strip, 0px)) !important; }
+html.snap main > :not(.hero)[style*="--strip"] { min-height: calc(var(--screen, 100svh) - var(--strip)) !important; }
+html.snap .snap-hide { display: none !important; }
+
+/* ---------- phones: lists one at a time, with buttons ---------- */
+.pg-nav { display: none; }
+@media (max-width: 759px) {
+  [data-pg] { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-auto-flow: row !important; grid-auto-columns: auto !important; overflow: visible !important; margin-inline: 0 !important; padding-inline: 0 !important; scroll-snap-type: none !important; }
+  [data-pg] > :not(.pg-on) { display: none !important; }
+  [data-pg] > .pg-on { animation: pg-in .45s var(--ease-out, ease) both; opacity: 1; transform: none; }
+  .pg-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 12px; }
+  .pg-b { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line); background: var(--card, transparent); color: var(--text); }
+  .pg-b:active { transform: scale(.94); }
+  .pg-n { min-width: 4.5ch; text-align: center; font-weight: 600; font-size: .9rem; color: var(--text-2); font-variant-numeric: tabular-nums; }
+}
+@keyframes pg-in { from { opacity: 0; translate: 0 10px; } }
+/* the header keeps one height on a snapping page, so nothing below it shifts while scrolling */
+html.snap { --hd-h: 60px; }
+/* lists that no longer scroll sideways must not leave snap points in the page */
+@media (max-width: 759px) { html.snap :is(.gal-grid, .rev-grid, .notes, .vc-grid, .near-grid, [data-pg]) > * { scroll-snap-align: none !important; } }
+
 /* ---------- availability calendar (shared, added with @uses cal) ---------- */
 .cal { --cal-sel: var(--primary); --on-cal-sel: var(--on-primary); display: grid; gap: var(--s2); min-width: 0; }
 :root[data-theme="dark"] .cal { --cal-sel: var(--accent); --on-cal-sel: var(--on-accent); }
@@ -711,3 +738,137 @@ html.past-top .book-bar { transform: none; }
 
 /* score out of 10 */
 .rev-score > b i { font-style: normal; font-size: .45em; opacity: .7; margin-left: 2px; }
+
+/* =====================================================================
+   ONE SECTION PER SCREEN (home page): every section fills the screen,
+   its content centred and fitting inside; lists swipe on phones.
+   ===================================================================== */
+:root { --screen: calc(100svh - 61px); }
+body[data-page="home"] main > section:not(.hero) { min-height: var(--screen); display: flex; flex-direction: column; justify-content: center; padding-block: clamp(28px, 6svh, 72px); }
+body[data-page="home"] main > section > .wrap { width: min(100% - 2 * var(--gut), var(--wrap)); }
+.sec-head { margin-bottom: clamp(16px, 3.5svh, 44px); }
+.hero { min-height: min(100svh, 940px); }
+/* computers: cards and photos sized so each section fits */
+@media (min-width: 760px) {
+  .vc-pic { aspect-ratio: 16 / 10; }
+  .vc-body { padding: var(--s2) var(--s3) var(--s3); gap: 12px; }
+  .vc-body > p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .near-card figure { aspect-ratio: 16 / 10; }
+  .near-card > div { padding: var(--s2) var(--s3); }
+  .rev-card { padding: var(--s3); }
+  .rev-top { margin-bottom: var(--s3); }
+  .welcome-pics { max-height: 68svh; }
+  .wp1 { aspect-ratio: auto; height: min(62svh, 560px); }
+  .wp2 { aspect-ratio: auto; height: min(50svh, 440px); }
+  .loc-map { min-height: min(48svh, 420px); }
+}
+@media (max-width: 759px) {
+  body[data-page="home"] main > section:not(.hero) { padding-block: 22px 92px; }
+  body[data-page="home"] main > .last { padding-bottom: 22px; }
+  .sec-head { margin-bottom: 14px; gap: 6px; }
+  .h2 { font-size: clamp(1.9rem, 8vw, 2.3rem); }
+  .lead { font-size: .98rem; }
+  /* book direct: four reasons as a 2 x 2 grid */
+  .direct-in { gap: var(--s3); }
+  .direct-copy { gap: 8px; }
+  .direct-copy p:last-child { font-size: .92rem; }
+  .direct-list { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .direct-list li { flex-direction: column; gap: 8px; padding: 14px; }
+  .direct-list span { width: 36px; height: 36px; }
+  .direct-list h3 { font-size: .95rem; }
+  .direct-list p { font-size: .8rem; }
+  /* welcome: shorter arched photos */
+  .welcome-in { gap: var(--s3); }
+  .welcome-pics { grid-template-columns: 1fr 1fr; max-width: 420px; }
+  .wp1, .wp2 { aspect-ratio: auto; height: 26svh; transform: none; }
+  .welcome-copy { gap: 10px; }
+  .welcome-copy > p { font-size: .94rem; }
+  .welcome-copy .sign { font-size: 1.25rem; }
+  /* villa cards swipe, one at a time */
+  .vc-grid { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 86%; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding: 4px var(--gut) 10px; scroll-padding-inline: var(--gut); }
+  .vc-grid::-webkit-scrollbar { display: none; }
+  .vc { scroll-snap-align: start; }
+  .vc-pic { aspect-ratio: 4 / 3; }
+  .vc-body { padding: 16px; gap: 10px; }
+  .vc-body > p { font-size: .9rem; }
+  /* comforts: two neat rows of three */
+  .amen-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .amen-row li { padding: 10px 2px; gap: 8px; font-size: .82rem; }
+  .amen-row span { width: 52px; height: 52px; }
+  /* reviews: the score and the cards, links underneath in one line */
+  .rev-top { gap: 12px; margin-bottom: 14px; }
+  .rev-score > b { font-size: 2.8rem; }
+  .rev-side { grid-auto-flow: column; justify-content: start; align-items: center; gap: 8px 14px; flex-wrap: wrap; }
+  .rev-link { font-size: .82rem; }
+  .rev-g { display: none; }
+  .rev-card { padding: 20px 18px; }
+  .rev-card blockquote { font-size: 1.1rem; }
+  .rev-nav { margin-top: 12px; }
+  /* nearby: the cards already swipe */
+  .near-card figure { aspect-ratio: 16 / 11; }
+  .near-card > div { padding: 14px 16px; }
+  /* location (home): facts and directions; the map is on the contact page */
+  body[data-page="home"] .loc-map { display: none; }
+  .loc-facts li { grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 10px; row-gap: 0; padding: 10px 12px; align-items: center; }
+  .loc-facts .i { grid-row: 1 / 3; margin: 0; }
+  .loc-facts b { font-size: 1.15rem; }
+  .faq-list summary { min-height: 54px; font-size: .95rem; }
+}
+@media (min-width: 760px) and (max-height: 900px) { .vc-pic { aspect-ratio: 2 / 1; } .vc-body { gap: 8px; } }
+@media (max-width: 759px) {
+  .vc-pic { aspect-ratio: 16 / 10; }
+  .vc-body > p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .vc-foot { padding-top: 10px; }
+  .wp1, .wp2 { height: 23svh; }
+}
+
+@media (max-width: 759px) { .rev-top { grid-template-columns: minmax(0, 1fr); } .rev-side { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; } .rev-score { flex-basis: 100%; } }
+
+/* computers: the villas in one row on the home page (more than three slide sideways) */
+@media (min-width: 960px) {
+  body[data-page="home"] .vc-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 2 * var(--s3)) / 3); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: 6px; }
+  body[data-page="home"] .vc-grid:not(:has(> :nth-child(3))) { grid-auto-columns: calc((100% - var(--s3)) / 2); }
+  body[data-page="home"] .vc { scroll-snap-align: start; }
+}
+@media (min-width: 960px) and (max-width: 1279px) { body[data-page="home"] .vc-body { padding: 16px; } body[data-page="home"] .vc-body > p { font-size: .9rem; } }
+@media (min-width: 960px) and (max-height: 820px) {
+  body[data-page="home"] .vc-pic { aspect-ratio: 16 / 7; }
+  body[data-page="home"] .vc-body > p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+/* phones: no sideways swiping - villas as a list, reviews move with the buttons only */
+@media (max-width: 759px) {
+  .vc-grid { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; margin-inline: 0; padding: 0; gap: 12px; }
+  .vc { grid-template-rows: none; grid-template-columns: 36% minmax(0, 1fr); }
+  .vc-pic { aspect-ratio: auto !important; height: 100%; min-height: 128px; }
+  .vc-body { padding: 12px 14px; gap: 6px; align-content: center; }
+  .vc-body > p, .vc-tag { display: none; }
+  body[data-page="home"] .vc-grid > :nth-child(n + 4) { display: none; }
+  .rev-track { overflow-x: hidden !important; touch-action: pan-y; }
+  .rev-track > li { flex-basis: 100% !important; }
+}
+/* phones: each villa as a compact row so all of them fit one screen */
+@media (max-width: 759px) {
+  .vc { grid-template-columns: 34% minmax(0, 1fr); }
+  .vc-pic { min-height: 0; }
+  .vc-pic .badge { display: none; }
+  .vc-body { padding: 10px 12px; gap: 4px; }
+  .vc-body .h3 { font-size: 1.15rem; }
+  .vc-body .feat { gap: 2px 10px; font-size: .78rem; }
+  .vc-body .feat li:nth-child(n + 3) { display: none; }
+  .vc-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 6px; }
+  .vc-foot .price { font-size: .8rem; line-height: 1.15; }
+  .vc-foot .price small { display: block; }
+  .vc-foot .btn { min-height: 38px; padding: 0 14px; font-size: .85rem; }
+  body[data-page="home"] .hero .h1 { font-size: clamp(2.3rem, 10.5vw, 2.8rem); }
+  body[data-page="home"] .hero .lead { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
+@media (max-width: 759px) {
+  .wp1, .wp2 { height: 24svh; }
+  .vc-body .h3 { font-size: 1.05rem; }
+  .vc-grid { gap: 10px; }
+}
+@media (max-width: 759px) {
+  .wp1, .wp2 { height: 21svh; }
+  .welcome-copy > p { font-size: .9rem; line-height: 1.45; }
+}
